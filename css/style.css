@@ -1,4 +1,7 @@
 :root {
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-pixel: "Press Start 2P", ui-monospace, Menlo, Consolas, monospace;
+
   --bg-page: #0a0b0e;
   --bg-base: #0f1115;
   --bg-alt: #12161c;
@@ -9,23 +12,42 @@
   --accent: #7ce3a1;
 }
 
+/* ===== 2. BASE ===== */
+* {
+  box-sizing: border-box; /* padding e borda ficam DENTRO da largura */
+}
+
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 70px;
+  scroll-padding-top: 56px; /* altura da nav: evita o título ficar escondido atrás dela */
 }
 
 body {
   margin: 0;
-  padding: 0;
   background: var(--bg-base);
   color: var(--text);
-  font-family: system-ui, sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Seletor agrupado: a mesma regra para vários elementos, separados por vírgula */
+nav, .rotulo, h1, h2 {
+  font-family: var(--font-pixel);
+}
+
+.container {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== 3. NAVEGAÇÃO ===== */
 header {
-  background: var(--bg-page);
-  border-bottom: 1px solid var(--border);
-  padding: 16px 0;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -35,34 +57,185 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 clamp(16px, 4vw, 160px);
+  padding: 14px clamp(16px, 4vw, 160px);
+  font-size: 11px;
+  background: #2b2d31;
+  /* Duas sombras "inset" (por dentro) simulam o chanfro: borda clara em cima/esquerda, escura embaixo/direita */
+  box-shadow: inset 3px 3px 0 #50545d, inset -3px -3px 0 #121316;
+}
+
+.logo {
+  color: var(--accent);
 }
 
 .links {
   display: flex;
-  gap: 34px;
+  gap: 16px;
   flex-wrap: wrap;
-  color: inherit;
+  color: var(--text-mute);
 }
 
-.links a:hover {  color: var(--accent); }
-
-a {
-  color: inherit;
-  text-decoration: none;
+.links a {
+  border-bottom: 2px solid transparent; /* reserva o espaço da linha para o hover não "pular" */
+  transition: color 0.15s, border-color 0.15s;
 }
 
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px;
+.links a:hover,
+.links a:focus-visible {
+  color: var(--accent);
+  border-color: var(--accent);
+  outline: none;
 }
 
-section {
-  padding: 64px 0;
+@media (max-width: 560px) {
+  nav {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
 }
 
-#sobre {  background: var(--bg-base); }
-#projetos {  background: var(--bg-alt); }
-#skills {  background: var(--bg-base); }
-#contato {  background: var(--bg-alt); }
+/* ===== 4. TEXTOS COMUNS ===== */
+.rotulo {
+  font-size: 11px;
+  color: var(--accent);
+  margin: 0 0 12px;
+}
+
+h2 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 0 0 22px;
+}
+
+/* ===== 5. SEÇÕES ===== */
+#sobre    { background: var(--bg-alt);  padding: 0; box-shadow: inset 3px 3px 0 #50545d, inset -3px -3px 0 #121316; }
+#projetos { background: var(--bg-base); padding: 30px 0 34px; box-shadow: inset 3px 3px 0 #50545d, inset -3px -3px 0 #121316; }
+#skills   { background: var(--bg-alt);  padding: 30px 0 26px; box-shadow: inset 3px 3px 0 #50545d, inset -3px -3px 0 #121316; }
+#contato  { background: var(--bg-base); padding: 30px 0 26px; box-shadow: inset 3px 3px 0 #50545d, inset -3px -3px 0 #121316; }
+
+#contato h2 { margin-bottom: 18px; }
+
+/* ===== 6. SOBRE ===== */
+/* Fica DEPOIS do .container: mesma força, vale a última. Como usamos
+   padding-top/bottom (e não o atalho), o padding lateral do container continua. */
+.sobre-topo {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+  flex-wrap: wrap;      /* + min-width: as colunas empilham sozinhas quando não cabem */
+  padding-top: 28px;
+  padding-bottom: 8px;
+}
+
+.sobre-id {
+  flex: 1;
+  min-width: 240px;
+}
+
+.sobre-info {
+  flex: 1.2;            /* 20% mais larga que a coluna da esquerda */
+  min-width: 260px;
+}
+
+.sobre-id .rotulo {
+  margin-bottom: 14px;
+}
+
+.sobre-id h1 {
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 400;
+  margin: 0;
+}
+
+.sub {
+  font-size: 14px;
+  color: var(--text-mute);
+  margin: 12px 0 0;
+}
+
+.sobre-info p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-soft);
+  margin: 0 0 12px;
+}
+
+/* Números */
+.stats {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.stats li {
+  border: 0.5px solid var(--border);
+  background: #161920;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.stats strong {
+  display: block;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.stats span {
+  font: 11px var(--font-mono); /* atalho: tamanho + família de uma vez */
+  color: var(--text-mute);
+}
+
+/* Cursor piscando */
+.cursor {
+  color: var(--accent);
+  animation: piscar 1s steps(1) infinite;
+}
+
+@keyframes piscar {
+  50% { opacity: 0; }
+}
+
+/* Marcador provisório do cenário (será substituído pelo SVG) */
+.cenario {
+  height: 170px;
+  border-top: 1px dashed var(--border);
+}
+
+/* ===== 7. DIVISORES ENTRE SEÇÕES ===== */
+.divisor {
+  height: 16px;
+}
+
+/* repeating-linear-gradient(ângulo, cor início fim, cor início fim): faixas de 16px alternadas */
+.divisor-terra {
+  background: repeating-linear-gradient(90deg, #6b4c36 0 16px, #5a4130 16px 32px);
+}
+.divisor-pedra {
+  background: repeating-linear-gradient(90deg, #3a3f4a 0 16px, #2f333d 16px 32px);
+}
+.divisor-noite {
+  background: repeating-linear-gradient(90deg, #1b1d23 0 16px, #15171c 16px 32px);
+}
+
+/* ===== 8. RODAPÉ ===== */
+.copy {
+  font: 11px var(--font-mono);
+  color: #5f6573;
+  margin: 0;
+  padding: 0 0 24px;
+}
+
+/* ===== 9. ACESSIBILIDADE ===== */
+/* Quem pediu "reduzir movimento" no sistema não vê animações */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
