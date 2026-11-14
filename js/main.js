@@ -1,4 +1,6 @@
 import { PROJETOS } from './projetos.js';
+import { SKILLS, TOTAL_SLOTS } from './skills.js';
+import { DECORACOES } from './decoracoes.js';
 
 const botao = document.querySelector('.menu-btn');
 const menu = document.querySelector('#menu');
@@ -163,6 +165,7 @@ const lista = document.querySelector('#projetos-lista');
 lista.innerHTML = PROJETOS.map((p, i) => `
   <article class="slot">
     <div class="card bv" style="animation-delay:${(0.05 + i * 0.15).toFixed(2)}s">
+      ${(p.enfeites || []).map((nome) => DECORACOES[nome]).join('')}
       <div class="moldura">
         <img src="${p.imagem}" alt="Captura de tela do ${p.nome}" loading="lazy">
       </div>
@@ -192,3 +195,98 @@ const observador = new IntersectionObserver((entradas) => {
 }, { threshold: 0.2 });                       // quando 20% do card estiver visível
 
 document.querySelectorAll('.card').forEach((card) => observador.observe(card));
+
+// ===== Inventário de skills =====
+const hotbar = document.querySelector('#hotbar');
+const detalhe = {
+  icone: document.querySelector('#d-icone'),
+  nome: document.querySelector('#d-nome'),
+  nivel: document.querySelector('#d-nivel'),
+  barra: document.querySelector('#d-barra'),
+  texto: document.querySelector('#d-texto'),
+};
+
+// Barra de segmentos: "nivel" quadradinhos cheios de "total"
+function segmentos(nivel, total = 10) {
+  let html = '';
+  for (let i = 0; i < total; i++) {
+    html += `<span${i < nivel ? ' class="cheio"' : ''}></span>`;
+  }
+  return html;
+}
+
+// Preenche o card e marca o espaço selecionado
+function mostrarSkill(i) {
+  const s = SKILLS[i];
+  detalhe.icone.className = `ti ti-${s.icone}`;
+  detalhe.nome.textContent = s.nome;
+  detalhe.nivel.textContent = `nível ${s.nivel} de 10`;
+  detalhe.barra.innerHTML = segmentos(s.nivel);
+  detalhe.texto.textContent = s.descricao;
+
+  hotbar.querySelectorAll('.sl[data-i]').forEach((espaco) => {
+    const ativo = Number(espaco.dataset.i) === i;
+    espaco.classList.toggle('sel', ativo);
+    espaco.setAttribute('aria-pressed', String(ativo));
+  });
+}
+
+let slots = '';
+for (let i = 0; i < TOTAL_SLOTS; i++) {
+  const s = SKILLS[i];
+  slots += s
+  ? `<button type="button" class="sl rc" data-i="${i}" aria-label="${s.nome}, nível ${s.nivel}">
+       <i class="ti ti-${s.icone}" aria-hidden="true"></i>
+       <span class="n" aria-hidden="true">${s.nivel}</span>
+       <span class="tt" aria-hidden="true">${s.nome}<br><span class="tt-nivel">nível ${s.nivel}</span></span>
+     </button>`
+  : '<div class="sl rc" aria-hidden="true"></div>';
+}
+hotbar.innerHTML = slots;
+
+// Um único ouvinte na hotbar inteira (delegação de eventos)
+hotbar.addEventListener('click', (evento) => {
+  const espaco = evento.target.closest('.sl[data-i]');
+  if (espaco) mostrarSkill(Number(espaco.dataset.i));
+});
+
+mostrarSkill(0);   // começa com a primeira skill selecionada
+
+// ===== Corações de energia =====
+// O coração é um "mapa de pixels" em texto: cada X vira um quadradinho de 1x1.
+const FORMA_CORACAO = [
+  '..XX.XX..',
+  '.XXXXXXX.',
+  'XXXXXXXXX',
+  'XXXXXXXXX',
+  '.XXXXXXX.',
+  '..XXXXX..',
+  '...XXX...',
+  '....X....',
+];
+
+function coracao(cheio) {
+  const cor = cheio ? '#E5484D' : '#2A2E37';
+  let quadrados = '';
+
+  FORMA_CORACAO.forEach((linha, y) => {
+    for (let x = 0; x < 9; x++) {
+      if (linha[x] === 'X') {
+        quadrados += `<rect x="${x}" y="${y}" width="1" height="1" fill="${cor}"/>`;
+      }
+    }
+  });
+
+  const brilho = cheio ? '<rect x="2" y="1" width="1" height="1" fill="#FF9A9A"/>' : '';
+  return `<svg class="px" viewBox="0 0 9 8" width="18" height="16" aria-hidden="true">${quadrados}${brilho}</svg>`;
+}
+
+const ENERGIA = 8;    // quantos corações estão cheios (de 10)
+let coracoes = '';
+for (let i = 0; i < 10; i++) {
+  coracoes += coracao(i < ENERGIA);
+}
+
+const caixaCoracoes = document.querySelector('#coracoes');
+caixaCoracoes.innerHTML = coracoes;
+caixaCoracoes.setAttribute('aria-label', `Energia: ${ENERGIA} de 10`);

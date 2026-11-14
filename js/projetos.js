@@ -7,6 +7,7 @@ export const PROJETOS = [
     imagem: 'assets/images/projeto-01.png',
     repo: 'https://github.com/lucasfbsdev8/projeto-01',
     deploy: 'https://projeto-01.netlify.app',
+    enfeites: ['picareta'],
   },
   {
     nome: 'Projeto 02',
@@ -15,6 +16,7 @@ export const PROJETOS = [
     imagem: 'assets/images/projeto-02.png',
     repo: 'https://github.com/lucasfbsdev8/projeto-02',
     deploy: 'https://projeto-02.netlify.app',
+    enfeites: ['cachorro', 'gema'],
   },
   {
     nome: 'Projeto 03',
@@ -23,5 +25,6 @@ export const PROJETOS = [
     imagem: 'assets/images/projeto-03.png',
     repo: 'https://github.com/lucasfbsdev8/projeto-03',
     deploy: 'https://projeto-03.netlify.app',
+    enfeites: ['tocha', 'espada'],
   },
 ];
