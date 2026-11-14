@@ -399,9 +399,9 @@ h2 {
 .card {
   padding: 12px;
   transition: transform 0.2s;
-  animation: subir 0.6s both;
+  animation: subir 0.6s both paused;
 }
-.card:hover { transform: translateY(-4px); }
+.card.visivel { animation-play-state: running;}
 
 @keyframes subir {
   from { opacity: 0; transform: translateY(14px); }
@@ -453,14 +453,15 @@ h2 {
   color: var(--text-soft);
   transition: color 0.15s, transform 0.15s;
 }
-.btn:hover,
 .btn:focus-visible {
   color: var(--accent);
-  transform: translateY(-2px);
-}
-.btn:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .card:hover { transform: translateY(-4px); }
+  .btn:hover  { color: var(--accent); transform: translateY(-2px); }
 }
 
 /* ===== 8. RODAPÉ ===== */
@@ -469,13 +470,4 @@ h2 {
   color: #5f6573;
   margin: 0;
   padding: 0 0 24px;
-}
-
-/* ===== 9. ACESSIBILIDADE ===== */
-/* Quem pediu "reduzir movimento" no sistema não vê animações */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    scroll-behavior: auto !important;
-  }
 }

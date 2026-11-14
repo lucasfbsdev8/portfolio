@@ -134,7 +134,7 @@ const OBJETOS = {
 
 // Ordem em que os tipos aparecem (se repete até completar TOTAL)
 const ORDEM = ['placa', 'arvore', 'gema', 'placa', 'tocha', 'arvore', 'placa', 'gema', 'tocha'];
-const TOTAL = ORDEM.length * 2;   // 10 × 2 = 20 objetos (2 voltas completas da ORDEM)
+const TOTAL = ORDEM.length * 2;   // 9 × 2 = 18 objetos (2 voltas completas da ORDEM)
 
 const PASSO = DURACAO / TOTAL;   // tempo entre um objeto e o seguinte
 let placas = 0;
@@ -180,3 +180,15 @@ lista.innerHTML = PROJETOS.map((p, i) => `
       </div>
     </div>
   </article>`).join('');
+
+  // Anima cada card quando ele entra na tela
+const observador = new IntersectionObserver((entradas) => {
+  entradas.forEach((entrada) => {
+    if (entrada.isIntersecting) {
+      entrada.target.classList.add('visivel');
+      observador.unobserve(entrada.target);   // anima uma vez só
+    }
+  });
+}, { threshold: 0.2 });                       // quando 20% do card estiver visível
+
+document.querySelectorAll('.card').forEach((card) => observador.observe(card));
