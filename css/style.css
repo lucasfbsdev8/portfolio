@@ -64,6 +64,29 @@ nav {
   box-shadow: inset 3px 3px 0 #50545d, inset -3px -3px 0 #121316;
 }
 
+/* ===== Botão sanduíche ===== */
+.menu-btn {
+  display: none;              /* escondido no desktop */
+  flex-direction: column;
+  gap: 4px;
+  background: none;           /* tira o visual padrão do botão */
+  border: 0;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.menu-btn span {
+  display: block;
+  width: 20px;
+  height: 3px;
+  background: var(--text);
+}
+
+.menu-btn:hover span,
+.menu-btn:focus-visible span {
+  background: var(--accent);
+}
+
 .logo {
   color: var(--accent);
 }
@@ -90,7 +113,25 @@ nav {
 @media (max-width: 560px) {
   nav {
     flex-wrap: wrap;
-    gap: 10px;
+  }
+  .menu-btn {
+    display: flex;            /* aparece só aqui */
+  }
+
+  .links {
+    display: none;            /* links escondidos até abrir */
+    flex-direction: column;   /* um embaixo do outro */
+    width: 100%;              /* ocupa a linha inteira, então quebra para baixo do logo */
+    gap: 0;
+    padding-top: 8px;
+  }
+
+  .links.aberto {
+    display: flex;            /* classe que o JS liga e desliga */
+  }
+
+  .links a {
+    padding: 10px 0;
   }
 }
 
