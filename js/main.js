@@ -1,3 +1,5 @@
+import { PROJETOS } from './projetos.js';
+
 const botao = document.querySelector('.menu-btn');
 const menu = document.querySelector('#menu');
 
@@ -97,15 +99,13 @@ document.querySelectorAll('[data-char]').forEach((el) => {
 
 // ===== Objetos que passam pelo cenário =====
 const DURACAO = 43.125;   // segundos para atravessar o mundo (precisa ser igual ao do CSS .it)
-// Nomes que aparecem nas placas (cabem ~10 caracteres)
-const PROJETOS = ['projeto 01', 'projeto 02', 'projeto 03'];
 
 // Cada tipo é uma função que devolve o desenho (em SVG) do objeto
 const OBJETOS = {
   placa: (nome) => `
     <rect x="40" y="96" width="4" height="34" fill="#6B4C36"/>
     <rect x="0" y="76" width="84" height="22" fill="#161920" stroke="#7CE3A1" stroke-width="2"/>
-    <text x="10" y="92" font-size="12" fill="#7CE3A1" style="font-family:var(--font-mono)">projeto 0${nome}</text>`,
+    <text x="10" y="92" font-size="12" fill="#7CE3A1" style="font-family:var(--font-mono)">${nome}</text>`,
 
   arvore: () => `
     <rect x="16" y="90" width="8" height="40" fill="#6B4C36"/>
@@ -145,7 +145,7 @@ for (let i = 0; i < TOTAL; i++) {
   let desenho;
 
   if (tipo === 'placa') {
-    desenho = OBJETOS.placa(PROJETOS[placas % PROJETOS.length]);
+    desenho = OBJETOS.placa(PROJETOS[placas % PROJETOS.length].placa);
     placas++;
   } else {
     desenho = OBJETOS[tipo]();
@@ -156,3 +156,27 @@ for (let i = 0; i < TOTAL; i++) {
 }
 
 document.querySelector('#objetos').innerHTML = html;
+
+// ===== Cards de projetos =====
+const lista = document.querySelector('#projetos-lista');
+
+lista.innerHTML = PROJETOS.map((p, i) => `
+  <article class="slot">
+    <div class="card bv" style="animation-delay:${(0.05 + i * 0.15).toFixed(2)}s">
+      <div class="moldura">
+        <img src="${p.imagem}" alt="Captura de tela do ${p.nome}" loading="lazy">
+      </div>
+      <h3 class="card-nome">${p.nome}</h3>
+      <p class="card-tags">${p.tags}</p>
+      <div class="card-links">
+        <a class="btn" href="${p.repo}" target="_blank" rel="noopener noreferrer"
+           aria-label="Código de ${p.nome} no GitHub">
+          <i class="ti ti-brand-github" aria-hidden="true"></i> código
+        </a>
+        <a class="btn" href="${p.deploy}" target="_blank" rel="noopener noreferrer"
+           aria-label="Abrir o site de ${p.nome}">
+          <i class="ti ti-external-link" aria-hidden="true"></i> site
+        </a>
+      </div>
+    </div>
+  </article>`).join('');

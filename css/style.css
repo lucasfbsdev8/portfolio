@@ -349,6 +349,120 @@ h2 {
   background: repeating-linear-gradient(90deg, #1b1d23 0 16px, #15171c 16px 32px);
 }
 
+/* ===== Projetos ===== */
+
+/* Chanfro cinza, usado nos cards (você pode reaproveitá-lo na nav e nas seções depois) */
+.bv {
+  background: #2b2d31;
+  box-shadow: inset 3px 3px 0 #50545d, inset -3px -3px 0 #121316;
+}
+
+/* Mesa de madeira: listras horizontais repetidas + chanfro */
+.mesa {
+  border: 6px solid #3b2a1c;
+  background: repeating-linear-gradient(0deg, #8a6542 0 14px, #6f4f33 14px 16px);
+  box-shadow: inset 3px 3px 0 #b58a5c, inset -3px -3px 0 #4a3524;
+  padding: 18px;
+}
+
+.mesa-titulo {
+  display: inline-block;
+  margin: 0 0 26px;
+  padding: 8px 12px;
+  background: #4a3524;
+  box-shadow: inset 3px 3px 0 #2b1e13, inset -3px -3px 0 #6f4f33;
+  font: 11px var(--font-pixel);
+  color: #f0ddb8;
+}
+
+.mesa-rodape {
+  margin: 22px 0 0;
+  font: 12px var(--font-mono);
+  color: #f0ddb8;
+}
+
+/* Grade: quantas colunas couberem, cada uma entre 260px e 360px, centralizadas */
+.grid-projetos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 360px));
+  justify-content: center;
+  gap: 34px 18px;
+}
+
+/* Bandeja marrom em volta de cada card */
+.slot {
+  background: #4a3524;
+  box-shadow: inset 3px 3px 0 #2b1e13, inset -3px -3px 0 #6f4f33;
+  padding: 12px;
+}
+
+.card {
+  padding: 12px;
+  transition: transform 0.2s;
+  animation: subir 0.6s both;
+}
+.card:hover { transform: translateY(-4px); }
+
+@keyframes subir {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
+/* Moldura da imagem: proporção fixa 16:10, imagem cobre a moldura sem distorcer */
+.moldura {
+  aspect-ratio: 16 / 10;
+  background: #161920;
+  border: 4px solid #8a6542;
+  box-shadow: inset 0 0 0 2px #4a3524;
+  overflow: hidden;
+}
+.moldura img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-nome {
+  margin: 12px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.card-tags {
+  margin: 2px 0 12px;
+  font: 12px var(--font-mono);
+  color: var(--text-mute);
+}
+
+/* Botões lado a lado, cada um ocupando metade */
+.card-links {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 10px;
+  background: #1b1d21;
+  box-shadow: inset 3px 3px 0 #0c0d0f, inset -3px -3px 0 #3c3f46;   /* chanfro "afundado" */
+  font: 12px var(--font-mono);
+  color: var(--text-soft);
+  transition: color 0.15s, transform 0.15s;
+}
+.btn:hover,
+.btn:focus-visible {
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
 /* ===== 8. RODAPÉ ===== */
 .copy {
   font: 11px var(--font-mono);
