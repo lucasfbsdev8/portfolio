@@ -1,6 +1,7 @@
 import { PROJETOS } from './projetos.js';
 import { SKILLS, TOTAL_SLOTS } from './skills.js';
 import { DECORACOES } from './decoracoes.js';
+import { CONTATOS } from './contato.js';
 
 const botao = document.querySelector('.menu-btn');
 const menu = document.querySelector('#menu');
@@ -100,7 +101,7 @@ document.querySelectorAll('[data-char]').forEach((el) => {
 });
 
 // ===== Objetos que passam pelo cenário =====
-const DURACAO = 43.125;   // segundos para atravessar o mundo (precisa ser igual ao do CSS .it)
+const DURACAO = 25.875;   // segundos para atravessar o mundo (precisa ser igual ao do CSS .it)
 
 // Cada tipo é uma função que devolve o desenho (em SVG) do objeto
 const OBJETOS = {
@@ -290,3 +291,19 @@ for (let i = 0; i < 10; i++) {
 const caixaCoracoes = document.querySelector('#coracoes');
 caixaCoracoes.innerHTML = coracoes;
 caixaCoracoes.setAttribute('aria-label', `Energia: ${ENERGIA} de 10`);
+
+// ===== Links de contato =====
+const listaContatos = document.querySelector('#contato-links');
+
+listaContatos.innerHTML = CONTATOS.map((c) => {
+  const externo = c.href.startsWith('http');   // e-mail (mailto:) não abre em outra aba
+  const abrirFora = externo ? ' target="_blank" rel="noopener noreferrer"' : '';
+  // Link só com ícone precisa de nome para o leitor de tela; com texto, o texto já basta
+  const nome = c.texto ? '' : ` aria-label="${c.rotulo}" title="${c.rotulo}"`;
+
+  return `<li>
+    <a class="lk${c.texto ? ' lk-texto' : ''}" href="${c.href}"${abrirFora}${nome}>
+      <i class="ti ti-${c.icone}" aria-hidden="true"></i>${c.texto ? ` ${c.texto}` : ''}
+    </a>
+  </li>`;
+}).join('');

@@ -307,7 +307,7 @@ h2 {
   to   { transform: translateX(-160px); }
 }
 
-.it { animation: it 43.125s linear infinite; }
+.it { animation: it 25.875s linear infinite; }
 @keyframes it {
   from { transform: translateX(2600px); }
   to   { transform: translateX(-160px); }
@@ -386,7 +386,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 360px));
   justify-content: center;
-  gap: 34px 18px;
+  gap: 56px 18px;
 }
 
 /* Bandeja marrom em volta de cada card */
@@ -543,19 +543,6 @@ h2 {
   80%, 100% { transform: translateX(130%); opacity: 0; }   /* sai */
 }
 
-.skills-corpo {
-  display: grid;
-  grid-template-columns: 1fr minmax(240px, 380px) 1fr;
-  gap: 24px;
-  align-items: end;
-}
-
-.inventario { justify-self: start;
-  width: 100%;
-  max-width: 400px;
-  min-width: 0;
-}
-
 .coracoes { display: flex; gap: 2px; margin-bottom: 10px; }
 
 .nivel {
@@ -567,7 +554,7 @@ h2 {
 }
 
 /* Barra de XP */
-.xp-barra { height: 12px; padding: 2px; margin-bottom: 10px; }
+.xp-barra { height: 12px; padding: 2px;}
 .xp-fundo { height: 100%; background: #1b1d21; }
 .xp {
   height: 100%;
@@ -618,10 +605,6 @@ h2 {
   text-shadow: 2px 2px 0 #3f3f3f;
 }
 
-@media (hover: hover) {
-  .sl[data-i]:hover { transform: translateY(-4px); }
-}
-
 .detalhe {
   display: flex;
   flex-direction: column;
@@ -664,7 +647,6 @@ h2 {
 }
 
 /* Balão com texto digitado + boneco */
-.bora { justify-self: end; text-align: center; }
 .balao { margin: 0 0 10px; padding: 8px 12px; font-size: 13px; }
 
 .digitando {
@@ -711,6 +693,169 @@ h2 {
   .conquista { padding: 6px 10px; gap: 8px; }
   .conquista p { font-size: 11px; }
   .conquista span { display: none; }   /* esconde "Conquista desbloqueada" e deixa só o troféu e o texto principal */
+}
+
+/* ===== Contato ===== */
+
+/* Chat do jogo: usa o chanfro "afundado" (.rc) */
+.chat {
+  padding: 12px 14px;
+  font: 13px var(--font-mono);
+  line-height: 1.9;
+  color: var(--text-soft);
+}
+.chat p { margin: 0; }
+.chat-sistema { color: #ffe066; }   /* a linha amarela, como no Minecraft */
+
+/* Texto sendo digitado. Sem animação, aparece inteiro. */
+.digitando-chat {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  animation: digitar-chat 5s steps(14) infinite;
+}
+@keyframes digitar-chat {
+  0%        { width: 0; }
+  40%, 90%  { width: 14ch; }   /* 14 caracteres: "bora conversar" */
+  100%      { width: 0; }
+}
+
+/* Barra de links: par da legenda da foto */
+.contato-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  min-height: 40px;      /* mesma altura da legenda */
+  margin: 0;
+  padding: 8px 14px;
+  list-style: none;
+}
+
+.lk {
+  font-size: 20px;
+  color: var(--text-soft);
+  transition: color 0.15s;
+}
+.lk-texto {
+  font: 13px var(--font-mono);
+  color: var(--accent);
+}
+.lk:hover,
+.lk:focus-visible {
+  color: var(--accent);
+  outline: none;
+}
+.lk:focus-visible {
+  outline: 2px solid var(--accent);   /* teclado precisa ver onde está */
+  outline-offset: 4px;
+}
+
+/* Coluna da esquerda: chat em cima (cresce) e barra de links embaixo */
+.contato-texto {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;              /* igual ao espaço entre a moldura e a legenda */
+  max-width: 640px;
+}
+
+/* Corpo: três faixas, como no inventário */
+.contato-corpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  grid-template-areas: "texto jogador retrato";
+  gap: 24px;
+  align-items: end;   /* os pés do boneco ficam na base da foto */
+}
+
+/* Faixa 1: chat e contatos */
+.contato-texto {
+  grid-area: texto;
+  align-self: center;
+  justify-self: start;
+  width: 100%;
+  max-width: 640px;        /* o chat não vira uma caixa enorme */
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Faixa 2: boneco na ponta direita da faixa, bem perto da foto */
+.contato-jogador {
+  grid-area: jogador;
+  justify-self: end;
+  display: flex;
+  flex-direction: column;   /* fala em cima, boneco embaixo */
+  align-items: flex-start;
+  margin-bottom: 52px;      /* altura da legenda (40px) + margem (12px): os pés ficam na base da moldura */
+}
+.contato-jogador .balao {
+  margin: 0 0 10px 20px;    /* a fala fica acima e à direita do boneco, virada para a foto */
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+
+/* Faixa 3: foto na ponta direita */
+.retrato {
+  grid-area: retrato;
+  justify-self: end;
+  width: 240px;
+  margin: 0;
+}
+
+/* Telas médias e celular: chat em cima, boneco e foto lado a lado embaixo */
+@media (max-width: 1100px) {
+  .contato-corpo {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "texto   texto"
+      "jogador retrato";
+    gap: 28px 16px;
+    align-items: end;
+  }
+
+  .contato-texto { max-width: none; }
+  .contato-jogador { justify-self: end; }
+  .retrato {
+    justify-self: start;
+    width: min(170px, 100%);
+  }
+
+  .contato-jogador .balao {
+    max-width: 110px;
+    margin-left: 0;
+    white-space: normal;    /* a fala quebra em duas linhas para caber */
+    text-align: center;
+  }
+
+  .contato-links li:first-child { flex-basis: 100%; }   /* e-mail na primeira linha, ícones juntos embaixo */
+}
+
+.retrato-moldura {
+  aspect-ratio: 4 / 5;
+  background: #161920;
+  border: 6px solid #8a6542;
+  box-shadow: inset 0 0 0 3px #4a3524, 0 0 0 3px #3b2a1c;   /* madeira por dentro e contorno escuro por fora */
+  overflow: hidden;
+}
+.retrato-moldura img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;               /* a foto cobre a moldura sem distorcer */
+  object-position: center 20%;     /* mostra mais o topo: ajuda a não cortar o rosto */
+}
+
+.retrato-legenda {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  margin-top: 12px;
+  padding: 8px 10px;
+  font: 12px var(--font-mono);
+  color: var(--text-soft);
 }
 
 /* ===== 8. RODAPÉ ===== */
