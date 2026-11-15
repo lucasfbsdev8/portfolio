@@ -752,14 +752,6 @@ h2 {
   outline-offset: 4px;
 }
 
-/* Coluna da esquerda: chat em cima (cresce) e barra de links embaixo */
-.contato-texto {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;              /* igual ao espaço entre a moldura e a legenda */
-  max-width: 640px;
-}
-
 /* Corpo: três faixas, como no inventário */
 .contato-corpo {
   display: grid;

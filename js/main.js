@@ -163,6 +163,20 @@ document.querySelector('#objetos').innerHTML = html;
 // ===== Cards de projetos =====
 const lista = document.querySelector('#projetos-lista');
 
+// Monta só os botões que o projeto tem: código, site e/ou demo
+function botoesCard(p) {
+  const botoes = [
+    p.repo   && { href: p.repo,   icone: 'brand-github',  texto: 'código', label: `Código de ${p.nome} no GitHub` },
+    p.deploy && { href: p.deploy, icone: 'external-link', texto: 'site',   label: `Abrir o site de ${p.nome}` },
+    p.demo   && { href: p.demo,   icone: 'player-play',   texto: 'demo',   label: `Ver a demonstração de ${p.nome}` },
+  ].filter(Boolean);   // tira os que não existem
+
+  return botoes.map((b) => `
+    <a class="btn" href="${b.href}" target="_blank" rel="noopener noreferrer" aria-label="${b.label}">
+      <i class="ti ti-${b.icone}" aria-hidden="true"></i> ${b.texto}
+    </a>`).join('');
+}
+
 lista.innerHTML = PROJETOS.map((p, i) => `
   <article class="slot">
     <div class="card bv" style="animation-delay:${(0.05 + i * 0.15).toFixed(2)}s">
@@ -173,14 +187,7 @@ lista.innerHTML = PROJETOS.map((p, i) => `
       <h3 class="card-nome">${p.nome}</h3>
       <p class="card-tags">${p.tags}</p>
       <div class="card-links">
-        <a class="btn" href="${p.repo}" target="_blank" rel="noopener noreferrer"
-           aria-label="Código de ${p.nome} no GitHub">
-          <i class="ti ti-brand-github" aria-hidden="true"></i> código
-        </a>
-        <a class="btn" href="${p.deploy}" target="_blank" rel="noopener noreferrer"
-           aria-label="Abrir o site de ${p.nome}">
-          <i class="ti ti-external-link" aria-hidden="true"></i> site
-        </a>
+        ${botoesCard(p)}
       </div>
     </div>
   </article>`).join('');
