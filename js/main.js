@@ -169,6 +169,7 @@ function botoesCard(p) {
     p.repo   && { href: p.repo,   icone: 'brand-github',  texto: 'código', label: `Código de ${p.nome} no GitHub` },
     p.deploy && { href: p.deploy, icone: 'external-link', texto: 'site',   label: `Abrir o site de ${p.nome}` },
     p.demo   && { href: p.demo,   icone: 'player-play',   texto: 'demo',   label: `Ver a demonstração de ${p.nome}` },
+    p.exemplo && { href: p.exemplo, icone: 'file-text', texto: 'exemplo', label: `Ver um exemplo gerado pelo ${p.nome}` },
   ].filter(Boolean);   // tira os que não existem
 
   return botoes.map((b) => `
