@@ -14,13 +14,11 @@ HTML, CSS e JavaScript puro (módulos ES), sem frameworks.
 ## Funcionalidades
 - Design responsivo
 - Seção de projetos
-- Formulário de contato
+- Seção de contato
 
 ## Como rodar localmente
-git clone https://github.com/lucasfbsdev8/portfolio.git
+git clone https://github.com/lucasfbsdev8/portfolio
 cd portfolio
-npm install
-npm run dev
 Abra a pasta no VS Code, instale a extensão Live Server e clique em "Go Live".
 Os módulos JS não funcionam abrindo o `index.html` direto no navegador.
 
@@ -34,7 +32,7 @@ assets/    imagens e favicon
 
 ## Autor
 Lucas Fernandes · Patos de Minas, MG
-[E-mail](fernandesbragalucas529@gmail.com)
+[E-mail](mailto:fernandesbragalucas529@gmail.com)
 [LinkedIn](https://www.linkedin.com/in/lucasfernbs) · [GitHub](https://github.com/lucasfbsdev8)
 
 ## Licença
