@@ -32,7 +32,7 @@ assets/    imagens e favicon
 
 ## Autor
 Lucas Fernandes · Patos de Minas, MG
-[E-mail](mailto:fernandesbragalucas529@gmail.com)
+[E-mail](mailto:fernandesbragalucas529@gmail.com) · 
 [LinkedIn](https://www.linkedin.com/in/lucasfernbs) · [GitHub](https://github.com/lucasfbsdev8)
 
 ## Licença
