@@ -2,7 +2,7 @@
 // Ícones: procure em tabler.io/icons e use só o nome, sem o "ti-".
 // Com "texto", o link mostra ícone + texto. Sem "texto", mostra só o ícone.
 export const CONTATOS = [
-  { rotulo: 'E-mail', icone: 'mail', href: 'mailto:fernandesbragalucas529@gmail.com', texto: 'fernandesbragalucas592@gmail.com' },
+  { rotulo: 'E-mail', icone: 'mail', href: 'mailto:fernandesbragalucas529@gmail.com', texto: 'fernandesbragalucas529@gmail.com' },
   // wa.me: só números, com 55 (Brasil) + DDD + telefone. Sem parênteses, espaços ou traço.
   // O ?text= já deixa a mensagem pronta na conversa.
   { rotulo: 'WhatsApp', icone: 'brand-whatsapp', href: 'https://wa.me/5534998243363?text=Ol%C3%A1%20Lucas!%20Vi%20seu%20portf%C3%B3lio%20e%20queria%20conversar.' },

@@ -6,7 +6,7 @@ export const PROJETOS = [
     tags: 'html · css · js · python · mysql',
     imagem: 'assets/images/saboreal.png',
     repo: 'https://github.com/lucasfbsdev8/Saboreal---Fluxo-de-Caixa',
-    demo: 'https://youtu.be/WJcqhKdIWPA?si=cHN6-LnCtANG7KBh',
+    demo: 'https://youtu.be/VWYtqJx-uHI?si=X_2NYJlB8IL5H1K0',
     enfeites: ['picareta'],
   },
   {
@@ -15,7 +15,7 @@ export const PROJETOS = [
     tags: 'html · css · js',
     imagem: 'assets/images/sysplus.png',
     repo: 'https://github.com/lucasfbsdev8/Sysplus',
-    deploy: 'https://projeto-02.netlify.app',
+    deploy: 'https://lucasfbsdev8.github.io/Sysplus/',
     enfeites: ['cachorro', 'gema'],
   },
   {
@@ -24,7 +24,7 @@ export const PROJETOS = [
     tags: 'python',
     imagem: 'assets/images/curriculo.png',
     repo: 'https://github.com/lucasfbsdev8/gerador-curriculo-python',
-    demo: 'https://youtu.be/FOc6DmjdWkE?si=CHKH8-EOKgViDiRo',
+    demo: 'https://youtu.be/_Dawiwy9bmg?si=LU1nlyjJYrAD7gUe',
     exemplo: 'exemplo/curriculo.html',
     enfeites: ['tocha', 'espada'],
   },
