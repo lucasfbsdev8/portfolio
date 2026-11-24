@@ -10,4 +10,5 @@ export const CONTATOS = [
   { rotulo: 'LinkedIn', icone: 'brand-linkedin', href: 'https://www.linkedin.com/in/lucasfernbs' },
   { rotulo: 'Instagram dev', icone: 'brand-instagram', href: 'https://www.instagram.com/lucasfbs_dev' },
   { rotulo: 'Instagram pessoal', icone: 'brand-instagram', href: 'https://www.instagram.com/lucss_wz' },
+  { rotulo: 'YouTube', icone: 'brand-youtube', href: 'https://www.youtube.com/@lucasfbsdev8' },
 ];
